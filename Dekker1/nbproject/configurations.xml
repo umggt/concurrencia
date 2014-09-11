@@ -37,7 +37,7 @@
       <compileType>
         <ccTool>
           <standard>8</standard>
-          <commandLine>-pthread</commandLine>
+          <commandLine>-pthread -lncurses</commandLine>
         </ccTool>
       </compileType>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
@@ -56,7 +56,7 @@
         <ccTool>
           <developmentMode>5</developmentMode>
           <standard>8</standard>
-          <commandLine>-pthread</commandLine>
+          <commandLine>-pthread -lncurses</commandLine>
         </ccTool>
         <fortranCompilerTool>
           <developmentMode>5</developmentMode>

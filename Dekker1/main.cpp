@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   main.cpp
  * Author: miguelerm
  *
@@ -9,14 +9,33 @@
 #include <iostream>
 #include <thread>
 #include <time.h>
+#include <curses.h>
+#include <stdio.h>
+#include <string.h>
 
 using namespace std;
 
 int turno;
 bool cancelar;
 
+WINDOW * winA;
+WINDOW * winB;
+
+WINDOW * winTop;
+WINDOW * winBottom;
+
+void retardar_unos_milisegundos(int velocidad) {
+    for (int i = 0; i < velocidad && !cancelar; i++) {
+        for (int j = 0; j < velocidad && !cancelar; j++) {
+            /* no hace nada */
+        }
+    }
+}
+
 void ejecutar_seccion_critica_1() {
-    
+    waddstr(winA, "+");
+    wrefresh(winA);
+    retardar_unos_milisegundos(15000);
 }
 
 void proceso1() {
@@ -33,13 +52,15 @@ void proceso1() {
         turno = 2;
     }
 
-    cout << "Ha terminado el proceso 1" << endl;
+    waddstr(winA, "Ha terminado el proceso 1");
+    wrefresh(winA);
 
 }
 
-
 void ejecutar_seccion_critica_2() {
-    
+    waddstr(winB, "*");
+    wrefresh(winB);
+    retardar_unos_milisegundos(5000);
 }
 
 void proceso2() {
@@ -56,38 +77,70 @@ void proceso2() {
         turno = 1;
     }
 
-    cout << "Ha terminado el proceso 2" << endl;
+    waddstr(winB, "Ha terminado el proceso 2");
+    wrefresh(winB);
+}
+
+void inicializar_pantallas() {
+    setlocale(LC_ALL, "spanish");
+    initscr();
+    erase();
+    refresh();
+    cbreak();
+    noecho();
+    keypad(stdscr, TRUE);
+
+
+    int h, w;
+    getmaxyx(stdscr, h, w);
+
+    winA = newwin(h - 2, (w / 2) - 1, 1, 0);
+    winB = newwin(h - 2, (w / 2) - 1, 1, (w / 2));
+
+    //wattron(winA, COLOR_PAIR(COLOR_RED));
+    //wattron(winB, COLOR_PAIR(COLOR_GREEN));
+    //wrefresh(winA);
+    //wrefresh(winB);
+    //start_color();
+
+    winTop = newwin(1, w, 0, 0);
+    winBottom = newwin(1, w, h-1, 0);
+
+    const char * titulo = "=== Dekker I ===";
+
+    wmove(winTop, 0, (w / 2) - strlen(titulo));
+    waddstr(winTop, titulo);
+    wrefresh(winTop);
 
 }
 
-/*
- * 
- */
+void esperar_enter_del_usuario() {
+    waddstr(winBottom, "Presione la tecla [Enter] para salir.");
+    wrefresh(winBottom);
+    getch();
+    refresh();
+}
+
 int main(int argc, char** argv) {
 
-    setlocale(LC_ALL, "spanish");
+    inicializar_pantallas();
 
     srand(time(NULL));
     cancelar = false;
     turno = rand() % 100 + 1 <= 50 ? 1 : 2;
 
-    cout << "Ejecutando procesos (prioridad al " << turno << ")..." << endl;
-
     thread p1(proceso1);
     thread p2(proceso2);
-    
-    cout << "Presione cualquier tecla para salir." << endl;
-    cin.get();
-    
+
+
+    esperar_enter_del_usuario();
+
     cancelar = true;
-    
+
     p1.join();
     p2.join();
-    
-    cout << "Todos los procesos han finalizado." << endl;
-    
-    cout.flush();
-    
+
+    endwin();
     return EXIT_SUCCESS;
 }
 
