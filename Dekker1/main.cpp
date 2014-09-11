@@ -35,7 +35,7 @@ void retardar_unos_milisegundos(int velocidad) {
 void ejecutar_seccion_critica_1() {
     waddstr(winA, "+");
     wrefresh(winA);
-    retardar_unos_milisegundos(15000);
+    retardar_unos_milisegundos(10000);
 }
 
 void proceso1() {
@@ -96,12 +96,6 @@ void inicializar_pantallas() {
 
     winA = newwin(h - 2, (w / 2) - 1, 1, 0);
     winB = newwin(h - 2, (w / 2) - 1, 1, (w / 2));
-
-    //wattron(winA, COLOR_PAIR(COLOR_RED));
-    //wattron(winB, COLOR_PAIR(COLOR_GREEN));
-    //wrefresh(winA);
-    //wrefresh(winB);
-    //start_color();
 
     winTop = newwin(1, w, 0, 0);
     winBottom = newwin(1, w, h-1, 0);
