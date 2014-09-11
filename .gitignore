@@ -1,0 +1,14 @@
+/Dekker2/dist/
+/Dekker2/build/
+/Dekker3/build/
+/Dekker3/dist/
+/Dekker4/dist/
+/Dekker4/build/
+/Dekker5/dist/
+/Dekker5/build/
+
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
