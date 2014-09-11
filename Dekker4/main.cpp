@@ -120,7 +120,7 @@ void inicializar_pantallas() {
     winTop = newwin(1, w, 0, 0);
     winBottom = newwin(1, w, h-1, 0);
 
-    const char * titulo = "=== Dekker III ===";
+    const char * titulo = "=== Dekker IV ===";
 
     wmove(winTop, 0, (w / 2) - strlen(titulo));
     waddstr(winTop, titulo);
