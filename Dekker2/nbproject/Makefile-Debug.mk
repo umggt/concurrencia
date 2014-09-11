@@ -42,8 +42,8 @@ OBJECTFILES= \
 CFLAGS=
 
 # CC Compiler Flags
-CCFLAGS=-pthread
-CXXFLAGS=-pthread
+CCFLAGS=-pthread -lncurses
+CXXFLAGS=-pthread -lncurses
 
 # Fortran Compiler Flags
 FFLAGS=
