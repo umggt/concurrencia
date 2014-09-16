@@ -17,11 +17,11 @@
 
 El algoritmo de Dekker es un algoritmo de programación concurrente para exclusión mutua, que permite a dos procesos o hilos de ejecución compartir un recurso sin conflictos.
 
-Existen 5 versiones del algoritmo de dekker de las cuales la versión 5 es la que tiene mayor eficiencia y es tomado de la unión de la version 1 y la versión 4.
+Existen 5 versiones del algoritmo de dekker de las cuales la versión 5 es la que tiene mayor eficiencia y es tomado de la unión de la versión 1 y la versión 4.
 
 ### Acerca del algoritmo de Peterson ###
 
-El algoritmo de Peterson, es un algoritmo de programación concurrente para exclusión mutua, que permite a dos o más procesos o hilos de ejecución compartir un recurso sin conflictos, utilizando sólo memoria compartida para la comunicación.
+El algoritmo de Peterson, es un algoritmo de programación concurrente para exclusión mutua, que permite a dos o más procesos o hilos de ejecución compartir un recurso sin conflictos, utilizando solo memoria compartida para la comunicación.
 
 Peterson desarrolló el algoritmo como una simplificación del algoritmo de Dekker para dos procesos. Posteriormente este algoritmo fue generalizado para N procesos.
 
@@ -35,7 +35,7 @@ Para poder dividir la pantalla de la consola en dos áreas y que cada proceso es
 
 ### Compilación ###
 
-Existe un archivo `Makefile` para poder compilar facilmente los programas solamente ubicando el shell de linux en la carpeta de cada proyecto y ejecutando el siguiente comando:
+Existe un archivo `Makefile` para poder compilar fácilmente los programas solamente ubicando el shell de linux en la carpeta de cada proyecto y ejecutando el siguiente comando:
 
 ```sh
 make
@@ -59,7 +59,7 @@ g++ -g -std=c++11 -o ./build/dekker1 main.cpp -pthread -lncurses
 
 ## Dekker I ##
 
-La primer versión del algoritmo de Dekker es llamado **Alternancia Estricta**, es llamado de esta manera ya que obliga a que cada proceso tenga un turno, osea que hay un cambio de turno cada vez que un proceso sale de la sección critica, por lo tanto si un proceso es lento atrasara a otros procesos que son rápidos.
+La primer versión del algoritmo de Dekker es llamado **Alternancia Estricta**, es llamado de esta manera ya que obliga a que cada proceso tenga un turno, osea que hay un cambio de turno cada vez que un proceso sale de la sección crítica, por lo tanto si un proceso es lento atrasara a otros procesos que son rápidos.
 
 ### Características ###
 
@@ -146,14 +146,14 @@ int main(int argc, char** argv) {
 ### Descripción ###
 
 * Cuando un proceso es ejecutado verifica si es su turno, si no es su turno se queda en espera por medio de un ciclo while.
-* De lo contrario si es su turno avanza a la sección critica.
-* Cuando el proceso sale de la sección critica cambia de turno.
+* De lo contrario si es su turno avanza a la sección crítica.
+* Cuando el proceso sale de la sección crítica cambia de turno.
 * Se incluye una variable `cancelar` que se establece a `true` cuando el usuario presiona la tecla `Enter` para poder finalizar los procesos en cualquier momento.
 
 
 ## Dekker II ##
 
-Segunda versión del algoritmo de Dekker es llamado Problema de Interbloqueo, su nombre se debe a que si en cada ráfaga de CPU, cada proceso queda en el mismo estado, en el estado donde se le asigna que puede entrar a la sección critica. Entonces estando los dos procesos con opción a entrar, a la siguiente ráfaga de CPU ambos procesos verificaran si el proceso alterno puede entrar, viendo que el proceso alterno tiene la opción de entrar, los procesos quedan bloqueados ya que se quedaran enciclados bloqueándose mutuamente ya que no podrán entrar nunca a la sección critica.
+Segunda versión del algoritmo de Dekker es llamado Problema de Interbloqueo, su nombre se debe a que si en cada ráfaga de CPU, cada proceso queda en el mismo estado, en el estado donde se le asigna que puede entrar a la sección crítica. Entonces estando los dos procesos con opción a entrar, a la siguiente ráfaga de CPU ambos procesos verificaran si el proceso alterno puede entrar, viendo que el proceso alterno tiene la opción de entrar, los procesos quedan bloqueados ya que se quedaran enciclados bloqueándose mutuamente ya que no podrán entrar nunca a la sección crítica.
 
 ### Características ###
 
@@ -239,14 +239,14 @@ int main(int argc, char** argv) {
 
 ### Descripción ###
 
-* Cuando un proceso puede entrar verifica si otro proceso tiene la opción de poder entrar, si otro proceso también tiene la opción de poder entrar se da un interbloqueo. De lo contrario el proceso avanza a la sección critica.
-* Al salir de la sección critica el proceso cambia su opción. Y permite al otro proceso avanzar a la sección critica.
+* Cuando un proceso puede entrar verifica si otro proceso tiene la opción de poder entrar, si otro proceso también tiene la opción de poder entrar se da un interbloqueo. De lo contrario el proceso avanza a la sección crítica.
+* Al salir de la sección crítica el proceso cambia su opción. Y permite al otro proceso avanzar a la sección crítica.
 * Se incluye una variable `cancelar` que se establece a `true` cuando el usuario presiona la tecla `Enter` para poder finalizar los procesos en cualquier momento.
 
 
 ## Dekker III ##
 
-La Tercera versión del algoritmo de Dekker es llamado Colisión región crítica no garantiza la exclusión mutua, como su nombre lo indica se da una colisión en la región crítica por la forma en que son colocados por así decirlo los permisos, ya que primero se comprueba si otro proceso esta dentro y luego se indica que el proceso en el que se esta actualmente cambia diciendo que esta dentro. Y el problema se da cuando los procesos después de haber tenido sus ráfagas de CPU pasan de la fase de comprobación y se tiene libre el camino para entrar a la región critica, generando esto una colisión.
+La Tercera versión del algoritmo de Dekker es llamado Colisión región crítica no garantiza la exclusión mutua, como su nombre lo indica se da una colisión en la región crítica por la forma en que son colocados por así decirlo los permisos, ya que primero se comprueba si otro proceso está dentro y luego se indica que el proceso en el que se está actualmente cambia diciendo que está dentro. Y el problema se da cuando los procesos después de haber tenido sus ráfagas de CPU pasan de la fase de comprobación y se tiene libre el camino para entrar a la región crítica, generando esto una colisión.
 
 ### Características ###
 
@@ -331,15 +331,15 @@ int main(int argc, char** argv) {
 
 ### Descripción ###
 
-* Al ejecutarse el proceso, verifica si otro proceso esta dentro de la sección critica.
-* Si el otro proceso esta dentro entonces espera a que salga de la sección critica. De lo contrario pasa la fase de comprobación y cambia su estado a que esta dentro.
+* Al ejecutarse el proceso, verifica si otro proceso está dentro de la sección critica.
+* Si el otro proceso está dentro entonces espera a que salga de la sección critica. De lo contrario pasa la fase de comprobación y cambia su estado a que está dentro.
 * Luego de pasar la sección critica cambia su estado.
 * Se incluye una variable `cancelar` que se establece a `true` cuando el usuario presiona la tecla `Enter` para poder finalizar los procesos en cualquier momento.
 
 
 ## Dekker IV ##
 
-Cuarta versión del algoritmo de Dekker es llamado Postergación Indefinida, su nombre se debe a que en una parte del codigo es colocado un retardo con un tiempo aleatorio, y el retardo puede ser muy grande que no se sabe hasta cuando entrara a la sección critica.
+Cuarta versión del algoritmo de Dekker es llamado Postergación Indefinida, su nombre se debe a que en una parte del código es colocado un retardo con un tiempo aleatorio, y el retardo puede ser muy grande que no se sabe hasta cuándo entrara a la sección critica.
 
 ### Características ###
 
@@ -428,9 +428,9 @@ int main(int argc, char** argv) {
 
 ### Descripción ###
 
-* Luego de realizar sus tareas iniciales el procesos solicita poder entrar en la sección critica, si el otro proceso no puede entrar ya que su estado es `false` entonces el proceso entra sin problema a la sección critica.
+* Luego de realizar sus tareas iniciales el procesos solicita poder entrar en la sección crítica, si el otro proceso no puede entrar ya que su estado es `false` entonces el proceso entra sin problema a la sección crítica.
 * De lo contrario si el otro proceso también puede entrar entonces se entra al ciclo donde el proceso actual se niega el paso así mismo y con un retardo de x tiempo siendo este aleatorio se pausa el proceso, para darle vía libre a los otros procesos.
-* Luego de terminar su pausa entonces el proceso actual nuevamente puede entrar y nuevamente si el otro proceso puede entrar se repite el ciclo y si no hay otro proceso, entonces el proceso puede entrar en la sección critica.
+* Luego de terminar su pausa entonces el proceso actual nuevamente puede entrar y nuevamente si el otro proceso puede entrar se repite el ciclo y si no hay otro proceso, entonces el proceso puede entrar en la sección crítica.
 * Finalmente cambia su estado.
 * Se incluye una variable `cancelar` que se establece a `true` cuando el usuario presiona la tecla `Enter` para poder finalizar los procesos en cualquier momento.
 
@@ -539,8 +539,8 @@ int main(int argc, char** argv) {
 
 ### Descripción ###
 
-* Al ejecutarse se verifica si hay otro procesos que puede entrar, si lo hay se entra al ciclo y si es el turno de algún otro proceso cambia su estado a ya no poder entrar a la sección critica y nuevamente verifica si es el turno de algún otro proceso, si lo es, se queda enciclado hasta que se da un cambio de turno, luego nuevamente retoma su estado de poder entrar a la sección critica, regresa al ciclo y verifica si hay otro proceso que puede entrar entonces nuevamente se encicla, de lo contrario entra a la sección critica.
-* Al salir de la sección critica el proceso cambia su turno, cambia su estado y realiza sus tareas finales.
+* Al ejecutarse se verifica si hay otro procesos que puede entrar, si lo hay se entra al ciclo y si es el turno de algún otro proceso cambia su estado a ya no poder entrar a la sección crítica y nuevamente verifica si es el turno de algún otro proceso, si lo es, se queda enciclado hasta que se da un cambio de turno, luego nuevamente retoma su estado de poder entrar a la sección crítica, regresa al ciclo y verifica si hay otro proceso que puede entrar entonces nuevamente se encicla, de lo contrario entra a la sección crítica.
+* Al salir de la sección crítica el proceso cambia su turno, cambia su estado y realiza sus tareas finales.
 * Se incluye una variable `cancelar` que se establece a `true` cuando el usuario presiona la tecla `Enter` para poder finalizar los procesos en cualquier momento.
 
 
@@ -635,9 +635,9 @@ int main(int argc, char** argv) {
 ### Descripción ###
 
 * Al iniciar el proceso indica que desea entrar a su sección crítica, pero a la vez favorece al otro proceso.
-* Se crea un ciclo de espera hasta que que otro proceso haya salido de su sección crítica y que el proceso favorecido sea el proceso actual.
+* Se crea un ciclo de espera hasta que otro proceso haya salido de su sección crítica y que el proceso favorecido sea el proceso actual.
 * Se ejecuta la sección crítica.
-* Se indica que el proceso ya salió de la sección critica (`procesoX_desea_entrar=false`).
+* Se indica que el proceso ya salió de la sección crítica (`procesoX_desea_entrar=false`).
 * Se incluye una variable `cancelar` que se establece a `true` cuando el usuario presiona la tecla `Enter` para poder finalizar los procesos en cualquier momento.
 
 
